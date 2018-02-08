@@ -1,0 +1,19 @@
+cd ~/Gridcoin-Research/src
+mkdir -p obj/zerocoin && chmod +x leveldb/build_detect_platform
+make -f makefile.unix clean
+make -j8 -f makefile.unix USE_UPNP=-
+cd ~
+git clone https://github.com/gridcoin/Gridcoin-Research 
+git fetch --all
+git reset --hard origin/master 
+git config --global http.sslverify false
+strip gridcoinresearchd
+sudo install -m 755 gridcoinresearchd /usr/bin/gridcoinresearchd 
+mkdir ~/.GridcoinResearch 
+cd ~/
+chmod 700 .GridcoinResearch 
+cd ~/Gridcoin-Research
+rm -f build/o.*
+make -j4
+strip gridcoinresearch
+sudo install -m 755 gridcoinresearch /usr/bin/gridcoinresearch
